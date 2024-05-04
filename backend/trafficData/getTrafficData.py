@@ -14,7 +14,7 @@ def getTrafficData(path, db, collection):
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
 
     # Save image
-    k = './data/images/' + f'{path[0]}.jpg'
+    k = 'backend/trafficData/data/images/' + f'{path[0]}.jpg'
     timepoint = str(datetime.now())
     try:
         # print(requests.get(url, headers=headers).content)
