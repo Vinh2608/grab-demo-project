@@ -1,9 +1,8 @@
 import requests
 from detect import *
-from datetime import datetime
+import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import datetime
 
 AIR_API_KEY = os.environ.get('AIR_API_KEY')
 
