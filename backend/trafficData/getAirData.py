@@ -17,7 +17,6 @@ def getAirData(path, db, collection):
     try:
         response = requests.get(url)
         data = response.json()
-        print(json.dumpts())
 
         aqi = data["list"][0]["main"]["aqi"]
         components = data["list"][0]["components"]
