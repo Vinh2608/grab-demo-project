@@ -6,6 +6,7 @@ from datetime import datetime
 # from urls import *
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from pytz import timezone  
 
 def getTrafficData(path, db, collection):
 
@@ -15,7 +16,9 @@ def getTrafficData(path, db, collection):
 
     # Save image
     k = 'backend/trafficData/data/images/' + f'{path[0]}.jpg'
-    timepoint = str(datetime.now())
+    saigon = timezone('Asia/Saigon')
+    timepoint = datetime.now(saigon)
+    
     try:
         # print(requests.get(url, headers=headers).content)
         if (requests.get(url, headers=headers).headers['Content-Type']):
