@@ -6,7 +6,7 @@ from pymongo.server_api import ServerApi
 import datetime
 
 AIR_API_KEY = os.environ.get('AIR_API_KEY')
-
+print(AIR_API_KEY)
 
 def getAirData(path, db, collection):
     lat = path[3]
