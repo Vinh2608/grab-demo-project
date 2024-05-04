@@ -16,9 +16,11 @@ def getTrafficData(path, db, collection):
 
     # Save image
     k = 'backend/trafficData/data/images/' + f'{path[0]}.jpg'
+
     saigon = timezone('Asia/Saigon')
     timepoint = datetime.now(saigon)
-    
+    print("Time point is: ", timepoint)
+
     try:
         # print(requests.get(url, headers=headers).content)
         if (requests.get(url, headers=headers).headers['Content-Type']):
