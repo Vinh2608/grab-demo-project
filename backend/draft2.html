@@ -1,0 +1,233 @@
+if(typeof VDMS == "undefined") VDMS={};
+if(typeof VDMS.Web == "undefined") VDMS.Web={};
+if(typeof VDMS.Web.Library == "undefined") VDMS.Web.Library={};
+if(typeof VDMS.Web.Library.AJAX == "undefined") VDMS.Web.Library.AJAX={};
+if(typeof VDMS.Web.Library.AJAX.FolderAjax_class == "undefined") VDMS.Web.Library.AJAX.FolderAjax_class={};
+VDMS.Web.Library.AJAX.FolderAjax_class = function() {};
+Object.extend(VDMS.Web.Library.AJAX.FolderAjax_class.prototype, Object.extend(new AjaxPro.AjaxClass(), {
+	GetPathByNodeId: function(nodeId) {
+		return this.invoke("GetPathByNodeId", {"nodeId":nodeId}, this.GetPathByNodeId.getArguments().slice(1));
+	},
+	GetFolderById: function(nodeId) {
+		return this.invoke("GetFolderById", {"nodeId":nodeId}, this.GetFolderById.getArguments().slice(1));
+	},
+	GetFolderByPath: function(path) {
+		return this.invoke("GetFolderByPath", {"path":path}, this.GetFolderByPath.getArguments().slice(1));
+	},
+	JoinQueryWithPath: function(leftPath, rightPath, leftField, rightField, leftQuery, rightQuery, page, limit, notEqual, sortby, returnFields) {
+		return this.invoke("JoinQueryWithPath", {"leftPath":leftPath, "rightPath":rightPath, "leftField":leftField, "rightField":rightField, "leftQuery":leftQuery, "rightQuery":rightQuery, "page":page, "limit":limit, "notEqual":notEqual, "sortby":sortby, "returnFields":returnFields}, this.JoinQueryWithPath.getArguments().slice(11));
+	},
+	JoinQuery: function(path, leftField, rightField, leftQuery, rightQuery, page, limit, notEqual, sortby, returnFields) {
+		return this.invoke("JoinQuery", {"path":path, "leftField":leftField, "rightField":rightField, "leftQuery":leftQuery, "rightQuery":rightQuery, "page":page, "limit":limit, "notEqual":notEqual, "sortby":sortby, "returnFields":returnFields}, this.JoinQuery.getArguments().slice(10));
+	},
+	SearchQueryEx: function(path, isInTree, searchKey, layer, detail, page, limit, filterQuery, sortby, returnFields) {
+		return this.invoke("SearchQueryEx", {"path":path, "isInTree":isInTree, "searchKey":searchKey, "layer":layer, "detail":detail, "page":page, "limit":limit, "filterQuery":filterQuery, "sortby":sortby, "returnFields":returnFields}, this.SearchQueryEx.getArguments().slice(10));
+	},
+	SearchQueryDistinct: function(path, isInTree, searchKey, layer, detail, page, limit, filterQuery, sortby, returnFields, distinctField) {
+		return this.invoke("SearchQueryDistinct", {"path":path, "isInTree":isInTree, "searchKey":searchKey, "layer":layer, "detail":detail, "page":page, "limit":limit, "filterQuery":filterQuery, "sortby":sortby, "returnFields":returnFields, "distinctField":distinctField}, this.SearchQueryDistinct.getArguments().slice(11));
+	},
+	SearchQuery: function(path, isInTree, searchKey, layer, detail, page, limit, filterQuery, sortby, returnFields) {
+		return this.invoke("SearchQuery", {"path":path, "isInTree":isInTree, "searchKey":searchKey, "layer":layer, "detail":detail, "page":page, "limit":limit, "filterQuery":filterQuery, "sortby":sortby, "returnFields":returnFields}, this.SearchQuery.getArguments().slice(10));
+	},
+	SearchQueryWithStat: function(layerNames, statInfo) {
+		return this.invoke("SearchQueryWithStat", {"layerNames":layerNames, "statInfo":statInfo}, this.SearchQueryWithStat.getArguments().slice(2));
+	},
+	SearchQueryWithStatEx: function(path, isInTree, layerNames, statInfo, filterQuery) {
+		return this.invoke("SearchQueryWithStatEx", {"path":path, "isInTree":isInTree, "layerNames":layerNames, "statInfo":statInfo, "filterQuery":filterQuery}, this.SearchQueryWithStatEx.getArguments().slice(5));
+	},
+	SearchQueryWithGeoJson: function(path, isInTree, searchKey, layer, geoJson, distance, detail, page, limit, filterQuery, sortby, returnFields) {
+		return this.invoke("SearchQueryWithGeoJson", {"path":path, "isInTree":isInTree, "searchKey":searchKey, "layer":layer, "geoJson":geoJson, "distance":distance, "detail":detail, "page":page, "limit":limit, "filterQuery":filterQuery, "sortby":sortby, "returnFields":returnFields}, this.SearchQueryWithGeoJson.getArguments().slice(12));
+	},
+	SearchQueryWithStatAndGeoJson: function(path, isInTree, searchKey, layer, geoJson, distance, stringStats, detail, page, limit, filterQuery, sortby, returnFields) {
+		return this.invoke("SearchQueryWithStatAndGeoJson", {"path":path, "isInTree":isInTree, "searchKey":searchKey, "layer":layer, "geoJson":geoJson, "distance":distance, "stringStats":stringStats, "detail":detail, "page":page, "limit":limit, "filterQuery":filterQuery, "sortby":sortby, "returnFields":returnFields}, this.SearchQueryWithStatAndGeoJson.getArguments().slice(13));
+	},
+	BuildLuceneQuery: function(queryInfo) {
+		return this.invoke("BuildLuceneQuery", {"queryInfo":queryInfo}, this.BuildLuceneQuery.getArguments().slice(1));
+	},
+	GetChildById: function(id, nodeType) {
+		return this.invoke("GetChildById", {"id":id, "nodeType":nodeType}, this.GetChildById.getArguments().slice(2));
+	},
+	GetChildByIdWithPaging: function(id, nodeType, layerName, iPage, iPageSize) {
+		return this.invoke("GetChildByIdWithPaging", {"id":id, "nodeType":nodeType, "layerName":layerName, "iPage":iPage, "iPageSize":iPageSize}, this.GetChildByIdWithPaging.getArguments().slice(5));
+	},
+	GetChildByPath: function(path, nodeType) {
+		return this.invoke("GetChildByPath", {"path":path, "nodeType":nodeType}, this.GetChildByPath.getArguments().slice(2));
+	},
+	GetChildByPathWithPaging: function(path, nodeType, layerName, iPage, iPageSize) {
+		return this.invoke("GetChildByPathWithPaging", {"path":path, "nodeType":nodeType, "layerName":layerName, "iPage":iPage, "iPageSize":iPageSize}, this.GetChildByPathWithPaging.getArguments().slice(5));
+	},
+	GetParentById: function(id) {
+		return this.invoke("GetParentById", {"id":id}, this.GetParentById.getArguments().slice(1));
+	},
+	GetLastModified: function(layerName, nodeId) {
+		return this.invoke("GetLastModified", {"layerName":layerName, "nodeId":nodeId}, this.GetLastModified.getArguments().slice(2));
+	},
+	GetPropertyValueByName: function(layerName, nodeId, fieldName) {
+		return this.invoke("GetPropertyValueByName", {"layerName":layerName, "nodeId":nodeId, "fieldName":fieldName}, this.GetPropertyValueByName.getArguments().slice(3));
+	},
+	ConvertNameToUnsign: function(name) {
+		return this.invoke("ConvertNameToUnsign", {"name":name}, this.ConvertNameToUnsign.getArguments().slice(1));
+	},
+	CreateFolderIfNoExist: function(parentPath, title, description, name, content) {
+		return this.invoke("CreateFolderIfNoExist", {"parentPath":parentPath, "title":title, "description":description, "name":name, "content":content}, this.CreateFolderIfNoExist.getArguments().slice(5));
+	},
+	CreateFolder: function(parentPath, title, description, name, content) {
+		return this.invoke("CreateFolder", {"parentPath":parentPath, "title":title, "description":description, "name":name, "content":content}, this.CreateFolder.getArguments().slice(5));
+	},
+	UpdateFolder: function(nodePath, title, description, content) {
+		return this.invoke("UpdateFolder", {"nodePath":nodePath, "title":title, "description":description, "content":content}, this.UpdateFolder.getArguments().slice(4));
+	},
+	MoveNodeTo: function(path, targetParentPath) {
+		return this.invoke("MoveNodeTo", {"path":path, "targetParentPath":targetParentPath}, this.MoveNodeTo.getArguments().slice(2));
+	},
+	GetRelateFile: function(layername, id) {
+		return this.invoke("GetRelateFile", {"layername":layername, "id":id}, this.GetRelateFile.getArguments().slice(2));
+	},
+	GetRelateDataByField: function(id, layername, field, desfield, deslayername) {
+		return this.invoke("GetRelateDataByField", {"id":id, "layername":layername, "field":field, "desfield":desfield, "deslayername":deslayername}, this.GetRelateDataByField.getArguments().slice(5));
+	},
+	GetRelateData: function(layername, id) {
+		return this.invoke("GetRelateData", {"layername":layername, "id":id}, this.GetRelateData.getArguments().slice(2));
+	},
+	CreateFile: function(parentPath, name, title, des, layer, prop) {
+		return this.invoke("CreateFile", {"parentPath":parentPath, "name":name, "title":title, "des":des, "layer":layer, "prop":prop}, this.CreateFile.getArguments().slice(6));
+	},
+	UpdateFile: function(fileId, name, title, des, pLayerName, pDataProperties, saveToHistory) {
+		return this.invoke("UpdateFile", {"fileId":fileId, "name":name, "title":title, "des":des, "pLayerName":pLayerName, "pDataProperties":pDataProperties, "saveToHistory":saveToHistory}, this.UpdateFile.getArguments().slice(7));
+	},
+	UpdateFileSimple: function(fileId, pLayerName, pDataProperties, saveToHistory) {
+		return this.invoke("UpdateFileSimple", {"fileId":fileId, "pLayerName":pLayerName, "pDataProperties":pDataProperties, "saveToHistory":saveToHistory}, this.UpdateFileSimple.getArguments().slice(4));
+	},
+	UpdateMultipleFiles: function(fileIds, pLayerName, pDataProperties, saveToHistory) {
+		return this.invoke("UpdateMultipleFiles", {"fileIds":fileIds, "pLayerName":pLayerName, "pDataProperties":pDataProperties, "saveToHistory":saveToHistory}, this.UpdateMultipleFiles.getArguments().slice(4));
+	},
+	AddContent: function(parentPath, name, title, des, content, type) {
+		return this.invoke("AddContent", {"parentPath":parentPath, "name":name, "title":title, "des":des, "content":content, "type":type}, this.AddContent.getArguments().slice(6));
+	},
+	AddContentIfNotExits: function(parentPath, name, title, des, content, type) {
+		return this.invoke("AddContentIfNotExits", {"parentPath":parentPath, "name":name, "title":title, "des":des, "content":content, "type":type}, this.AddContentIfNotExits.getArguments().slice(6));
+	},
+	UpdateContent: function(nodePath, title, des, content, saveToHistory) {
+		return this.invoke("UpdateContent", {"nodePath":nodePath, "title":title, "des":des, "content":content, "saveToHistory":saveToHistory}, this.UpdateContent.getArguments().slice(5));
+	},
+	GetContent: function(path) {
+		return this.invoke("GetContent", {"path":path}, this.GetContent.getArguments().slice(1));
+	},
+	GetContentById: function(nodeId) {
+		return this.invoke("GetContentById", {"nodeId":nodeId}, this.GetContentById.getArguments().slice(1));
+	},
+	UpdateNodeProperties: function(path, properties) {
+		return this.invoke("UpdateNodeProperties", {"path":path, "properties":properties}, this.UpdateNodeProperties.getArguments().slice(2));
+	},
+	RestoreFolderByHistoryId: function(strLayerName, guidDataId, intHistoryId) {
+		return this.invoke("RestoreFolderByHistoryId", {"strLayerName":strLayerName, "guidDataId":guidDataId, "intHistoryId":intHistoryId}, this.RestoreFolderByHistoryId.getArguments().slice(3));
+	},
+	ConvertFile: function(fileId, name, title, des, pLayerNameOld, pLayerNameNew, pDataProperties) {
+		return this.invoke("ConvertFile", {"fileId":fileId, "name":name, "title":title, "des":des, "pLayerNameOld":pLayerNameOld, "pLayerNameNew":pLayerNameNew, "pDataProperties":pDataProperties}, this.ConvertFile.getArguments().slice(7));
+	},
+	DeleteNodes: function(paths) {
+		return this.invoke("DeleteNodes", {"paths":paths}, this.DeleteNodes.getArguments().slice(1));
+	},
+	DeleteNodesByIds: function(ids) {
+		return this.invoke("DeleteNodesByIds", {"ids":ids}, this.DeleteNodesByIds.getArguments().slice(1));
+	},
+	CanChangePermissions: function(pNodeId) {
+		return this.invoke("CanChangePermissions", {"pNodeId":pNodeId}, this.CanChangePermissions.getArguments().slice(1));
+	},
+	GetAllPermissions: function(pNodeId, getGroupPermission) {
+		return this.invoke("GetAllPermissions", {"pNodeId":pNodeId, "getGroupPermission":getGroupPermission}, this.GetAllPermissions.getArguments().slice(2));
+	},
+	GetUserPermission: function(pNodeId) {
+		return this.invoke("GetUserPermission", {"pNodeId":pNodeId}, this.GetUserPermission.getArguments().slice(1));
+	},
+	SetPermissions: function(path, principalIds, isInheritable, permissions, isAllow) {
+		return this.invoke("SetPermissions", {"path":path, "principalIds":principalIds, "isInheritable":isInheritable, "permissions":permissions, "isAllow":isAllow}, this.SetPermissions.getArguments().slice(5));
+	},
+	SetPermission: function(path, principalId, isInheritable, permissions, isAllow) {
+		return this.invoke("SetPermission", {"path":path, "principalId":principalId, "isInheritable":isInheritable, "permissions":permissions, "isAllow":isAllow}, this.SetPermission.getArguments().slice(5));
+	},
+	SetPermissionMulti: function(path, principalIds, isInheritable, permissions, isAllow) {
+		return this.invoke("SetPermissionMulti", {"path":path, "principalIds":principalIds, "isInheritable":isInheritable, "permissions":permissions, "isAllow":isAllow}, this.SetPermissionMulti.getArguments().slice(5));
+	},
+	SetAllPermissions: function(path, principalId, isInheritable, isAllow) {
+		return this.invoke("SetAllPermissions", {"path":path, "principalId":principalId, "isInheritable":isInheritable, "isAllow":isAllow}, this.SetAllPermissions.getArguments().slice(4));
+	},
+	SetAllPermissionsMulti: function(path, principalId, isInheritable, isAllow) {
+		return this.invoke("SetAllPermissionsMulti", {"path":path, "principalId":principalId, "isInheritable":isInheritable, "isAllow":isAllow}, this.SetAllPermissionsMulti.getArguments().slice(4));
+	},
+	SetInheritPermissions: function(pNodeId, isInherit) {
+		return this.invoke("SetInheritPermissions", {"pNodeId":pNodeId, "isInherit":isInherit}, this.SetInheritPermissions.getArguments().slice(2));
+	},
+	HasPermission: function(pNodeId, permission) {
+		return this.invoke("HasPermission", {"pNodeId":pNodeId, "permission":permission}, this.HasPermission.getArguments().slice(2));
+	},
+	HasPermissionByPath: function(path, permission) {
+		return this.invoke("HasPermissionByPath", {"path":path, "permission":permission}, this.HasPermissionByPath.getArguments().slice(2));
+	},
+	HasPermissionByPathWithUser: function(username, path, permission) {
+		return this.invoke("HasPermissionByPathWithUser", {"username":username, "path":path, "permission":permission}, this.HasPermissionByPathWithUser.getArguments().slice(3));
+	},
+	ShareNodes: function(sourceNodeIds, principalId, title, expiredDate) {
+		return this.invoke("ShareNodes", {"sourceNodeIds":sourceNodeIds, "principalId":principalId, "title":title, "expiredDate":expiredDate}, this.ShareNodes.getArguments().slice(4));
+	},
+	GetShareNodes: function(path) {
+		return this.invoke("GetShareNodes", {"path":path}, this.GetShareNodes.getArguments().slice(1));
+	},
+	DeleteShareNodes: function(shareIds, userName) {
+		return this.invoke("DeleteShareNodes", {"shareIds":shareIds, "userName":userName}, this.DeleteShareNodes.getArguments().slice(2));
+	},
+	CheckIsShared: function(guidNodeId, principalId) {
+		return this.invoke("CheckIsShared", {"guidNodeId":guidNodeId, "principalId":principalId}, this.CheckIsShared.getArguments().slice(2));
+	},
+	IsExpired: function(nodeId) {
+		return this.invoke("IsExpired", {"nodeId":nodeId}, this.IsExpired.getArguments().slice(1));
+	},
+	GetNamePathByParentPath: function(path) {
+		return this.invoke("GetNamePathByParentPath", {"path":path}, this.GetNamePathByParentPath.getArguments().slice(1));
+	},
+	GetTitlePathByParentPath: function(path) {
+		return this.invoke("GetTitlePathByParentPath", {"path":path}, this.GetTitlePathByParentPath.getArguments().slice(1));
+	},
+	SyncWorkflowStatus: function() {
+		return this.invoke("SyncWorkflowStatus", {}, this.SyncWorkflowStatus.getArguments().slice(0));
+	},
+	AutoSuggestKeyWork: function(strKey, strLayerName, limit) {
+		return this.invoke("AutoSuggestKeyWork", {"strKey":strKey, "strLayerName":strLayerName, "limit":limit}, this.AutoSuggestKeyWork.getArguments().slice(3));
+	},
+	BroadcastMessage: function(type, title, content, username) {
+		return this.invoke("BroadcastMessage", {"type":type, "title":title, "content":content, "username":username}, this.BroadcastMessage.getArguments().slice(4));
+	},
+	GetBagDetail: function(path) {
+		return this.invoke("GetBagDetail", {"path":path}, this.GetBagDetail.getArguments().slice(1));
+	},
+	GetTrashData: function(skip, take) {
+		return this.invoke("GetTrashData", {"skip":skip, "take":take}, this.GetTrashData.getArguments().slice(2));
+	},
+	Restore: function(path, targetPath) {
+		return this.invoke("Restore", {"path":path, "targetPath":targetPath}, this.Restore.getArguments().slice(2));
+	},
+	RestoreMulti: function(paths, targetPath) {
+		return this.invoke("RestoreMulti", {"paths":paths, "targetPath":targetPath}, this.RestoreMulti.getArguments().slice(2));
+	},
+	DeleteBag: function(path) {
+		return this.invoke("DeleteBag", {"path":path}, this.DeleteBag.getArguments().slice(1));
+	},
+	DeleteBagMulti: function(paths) {
+		return this.invoke("DeleteBagMulti", {"paths":paths}, this.DeleteBagMulti.getArguments().slice(1));
+	},
+	PurgeTrash: function() {
+		return this.invoke("PurgeTrash", {}, this.PurgeTrash.getArguments().slice(0));
+	},
+	GetTrashDataQuery: function(path, isInTree, searchKey, layer, detail, page, limit, filterQuery, sortby, returnFields) {
+		return this.invoke("GetTrashDataQuery", {"path":path, "isInTree":isInTree, "searchKey":searchKey, "layer":layer, "detail":detail, "page":page, "limit":limit, "filterQuery":filterQuery, "sortby":sortby, "returnFields":returnFields}, this.GetTrashDataQuery.getArguments().slice(10));
+	},
+	ToVN2000: function(wgs84, meridian) {
+		return this.invoke("ToVN2000", {"wgs84":wgs84, "meridian":meridian}, this.ToVN2000.getArguments().slice(2));
+	},
+	ToWGS84: function(vn2000, meridian) {
+		return this.invoke("ToWGS84", {"vn2000":vn2000, "meridian":meridian}, this.ToWGS84.getArguments().slice(2));
+	},
+	url: '/ajaxpro/VDMS.Web.Library.AJAX.FolderAjax,VDMS.Web.Library.ashx'
+}));
+VDMS.Web.Library.AJAX.FolderAjax = new VDMS.Web.Library.AJAX.FolderAjax_class();
+
