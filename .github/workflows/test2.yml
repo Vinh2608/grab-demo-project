@@ -21,10 +21,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r backend/trafficData/requirements.txt
-    - name: Run the code
+    - name: Run the code for traffic data
       env:
           MONGO_USER_NAME: ${{ secrets.MONGO_USER_NAME }}
           MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
-        run: python backend/trafficData/getTrafficData.py
+      run: | 
+        python backend/trafficData/getTrafficData.py
 
         
