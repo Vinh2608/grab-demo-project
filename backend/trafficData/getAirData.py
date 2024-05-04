@@ -17,6 +17,7 @@ def getAirData(path, db, collection):
     try:
         response = requests.get(url)
         data = response.json()
+        print(json.dumpts())
 
         aqi = data["list"][0]["main"]["aqi"]
         components = data["list"][0]["components"]
@@ -35,7 +36,7 @@ if __name__ == '__main__':
     MONGO_USER_NAME = os.environ.get('MONGO_USER_NAME')
     MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
     print(MONGO_USER_NAME)
-    
+
     # Create a new client and connect to the server
 
     paths = []
