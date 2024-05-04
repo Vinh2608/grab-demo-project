@@ -6,7 +6,6 @@ from pymongo.server_api import ServerApi
 import datetime
 
 AIR_API_KEY = os.environ.get('AIR_API_KEY')
-print(AIR_API_KEY)
 
 def getAirData(path, db, collection):
     lat = path[3]
@@ -34,15 +33,14 @@ if __name__ == '__main__':
 
     MONGO_USER_NAME = os.environ.get('MONGO_USER_NAME')
     MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
+
     print(MONGO_USER_NAME)
-
     # Create a new client and connect to the server
-
     paths = []
     database = None
     collection = None
 
-    uri = f"mongodb+srv://vinhluu2608:vuongtranlinhlinh123456789@cluster0.teog563.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    uri = f"mongodb+srv://{MONGO_USER_NAME}:{MONGO_PASSWORD}@cluster0.teog563.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     CLIENT = MongoClient(uri, server_api=ServerApi('1'))
     dbs = CLIENT.list_database_names()
 
