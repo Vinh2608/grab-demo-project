@@ -3,6 +3,7 @@ from detect import *
 import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import pytz
 
 AIR_API_KEY = os.environ.get('AIR_API_KEY')
 
@@ -18,13 +19,26 @@ def getAirData(path, db, collection):
 
         aqi = data["list"][0]["main"]["aqi"]
         components = data["list"][0]["components"]
-        time = datetime.datetime.fromtimestamp(data["list"][0]["dt"])
-        print(data["list"][0]["dt"])
+        time = datetime.datetime.fromtimestamp(data["list"][0]["dt"], datetime.UTC)
+
+        print(time)
+
+        # Define the timezone for Saigon
+        # 'Asia/Saigon' is now officially 'Asia/Ho_Chi_Minh'
+        saigon_tz = pytz.timezone('Asia/Ho_Chi_Minh')
+
+        # Localize the naive datetime object to UTC since UNIX timestamps are in UTC
+
+        # Convert the UTC time to Saigon time
+        saigon_time = time.astimezone(saigon_tz)
+
+        print(saigon_time)
+
         time = str(time)
         insert_data = {"aqp": aqi, "components": components, "time": time}
 
-        db[collection].find_one_and_update(
-            {"id": path[0]}, {"$push": {'air_data': insert_data}})
+        # db[collection].find_one_and_update(
+        #     {"id": path[0]}, {"$push": {'air_data': insert_data}})
 
     except Exception as e:
         print("Exception in air quality update ", e)
