@@ -19,7 +19,7 @@ def getTrafficData(path, db, collection):
 
     saigon = timezone('Asia/Saigon')
     timepoint = datetime.now(saigon)
-    print("Time point is: ", timepoint)
+    timepoint = str(timepoint)
 
     try:
         # print(requests.get(url, headers=headers).content)
@@ -47,7 +47,6 @@ def getTrafficData(path, db, collection):
                         bike = int(temp)
                 temp = part
                 count += 1
-
             data = {
                 "time": timepoint,
                 "car": car,
