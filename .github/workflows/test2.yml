@@ -24,7 +24,7 @@ jobs:
     - name: Run the code for traffic data
       env:
           MONGO_USER_NAME: ${{ secrets.MONGO_USER_NAME }}
-          MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
       run: | 
         python backend/trafficData/getTrafficData.py
 
