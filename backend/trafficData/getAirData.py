@@ -19,11 +19,12 @@ def getAirData(path, db, collection):
         aqi = data["list"][0]["main"]["aqi"]
         components = data["list"][0]["components"]
         time = datetime.datetime.fromtimestamp(data["list"][0]["dt"])
+        print(data["list"][0]["dt"])
         time = str(time)
         insert_data = {"aqp": aqi, "components": components, "time": time}
 
-        # db[collection].find_one_and_update(
-        #     {"id": path[0]}, {"$push": {'air_data': insert_data}})
+        db[collection].find_one_and_update(
+            {"id": path[0]}, {"$push": {'air_data': insert_data}})
 
     except Exception as e:
         print("Exception in air quality update ", e)
