@@ -26,4 +26,4 @@ jobs:
           MONGO_USER_NAME: ${{ secrets.MONGO_USER_NAME }}
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
       run: | 
-        python backend/trafficData/retrainModelAir.py
+        python backend/trafficData/retrainModelTraffic.py
