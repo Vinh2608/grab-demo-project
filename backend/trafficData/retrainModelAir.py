@@ -52,7 +52,7 @@ df_air = df_air[::10]
 df_air.reset_index(drop=True, inplace=True)
 df_air.columns = [' '.join(col).strip()
                   for col in df_air.columns.values]
-print('aqp Ba Tháng Hai - Sư Vạn Hạnh' in df_air.columns)
+print('aqp Ba Tháng Hai – Sư Vạn Hạnh' in df_air.columns)
 
 df_air = df_air.fillna(df_air.mean())
 series_weights = {}
