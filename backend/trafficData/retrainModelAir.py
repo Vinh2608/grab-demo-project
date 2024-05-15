@@ -51,7 +51,9 @@ df_air = df_air.unstack(level=0)
 print(df_air.columns)
 
 df_air = df_air[::10]
+print(df_air)
 df_air.reset_index(drop=True, inplace=True)
+print(df_air)
 print(df_air.columns)
 df_air.columns = [' '.join(col).strip()
                   for col in df_air.columns.values]
