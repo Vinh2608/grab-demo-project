@@ -22,6 +22,8 @@ collection = 'Place_LatLong_API'
 
 for document in database[collection].find():
     place_name = document['place']
+    if place_name == 'Ba Tháng Hai – Sư Vạn Hạnh':
+        print(True)
     for air in document['air_data']:
         air_data.append({
             'place_name': place_name,
@@ -40,6 +42,7 @@ for document in database[collection].find():
 
 # Create a DataFrame
 df_air = pd.DataFrame(air_data)
+print('Ba Tháng Hai – Sư Vạn Hạnh' in list(df_air['place_name']))
 print(df_air.columns)
 
 # Convert 'Datetime' to datetime type and ensure timezone is parsed
@@ -47,6 +50,11 @@ df_air.drop('time', axis=1, inplace=True)
 
 df_air['index'] = df_air.groupby('place_name').cumcount()
 df_air.set_index(['place_name', 'index'], inplace=True)
+
+for i in range(len(df_air.index)):
+  if 'Ba Tháng Hai – Sư Vạn Hạnh' in df_air.index[i][0]:
+    print(True)
+
 df_air = df_air.unstack(level=0)
 print(df_air.columns)
 
