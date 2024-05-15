@@ -40,6 +40,7 @@ for document in database[collection].find():
 
 # Create a DataFrame
 df_air = pd.DataFrame(air_data)
+print(df_air.columns)
 
 # Convert 'Datetime' to datetime type and ensure timezone is parsed
 df_air.drop('time', axis=1, inplace=True)
@@ -47,6 +48,7 @@ df_air.drop('time', axis=1, inplace=True)
 df_air['index'] = df_air.groupby('place_name').cumcount()
 df_air.set_index(['place_name', 'index'], inplace=True)
 df_air = df_air.unstack(level=0)
+print(df_air.columns)
 
 df_air = df_air[::10]
 df_air.reset_index(drop=True, inplace=True)
