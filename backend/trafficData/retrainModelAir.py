@@ -57,6 +57,7 @@ for i in range(len(df_air.index)):
 
 df_air = df_air.unstack(level=0)
 print(df_air.columns)
+print(df_air)
 
 df_air = df_air[::10]
 print(df_air)
