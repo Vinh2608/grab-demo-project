@@ -1,5 +1,4 @@
 import os
-from google.colab import userdata
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pandas as pd
@@ -9,8 +8,8 @@ from sklearn.preprocessing import StandardScaler
 
 from skforecast.ForecasterAutoregMultiSeries import ForecasterAutoregMultiSeries
 
-MONGO_USER_NAME = userdata.get('MONGO_USER_NAME')
-MONGO_PASSWORD = userdata.get('MONGO_PASSWORD')
+MONGO_USER_NAME = os.environ.get('MONGO_USER_NAME')
+MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
 
 uri = f"mongodb+srv://{MONGO_USER_NAME}:{MONGO_PASSWORD}@cluster0.teog563.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
