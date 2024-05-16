@@ -52,8 +52,8 @@ df_air = df_air.unstack(level=0)
 df_air.reset_index(drop=True, inplace=True)
 df_air.columns = [' '.join(col).strip()
                   for col in df_air.columns.values]
-df_air.drop('index', axis = 1, inplace=True)
-
+print(df_air)
+print(df_air.columns)
 df_air = df_air.fillna(df_air.mean())
 series_weights = {}
 for x in df_air.columns:
