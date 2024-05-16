@@ -1,4 +1,5 @@
 import os
+from google.colab import userdata
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import pandas as pd
@@ -8,11 +9,10 @@ from sklearn.preprocessing import StandardScaler
 
 from skforecast.ForecasterAutoregMultiSeries import ForecasterAutoregMultiSeries
 
-MONGO_USER_NAME = os.environ.get('MONGO_USER_NAME')
-MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
+MONGO_USER_NAME = userdata.get('MONGO_USER_NAME')
+MONGO_PASSWORD = userdata.get('MONGO_PASSWORD')
 
-uri = f"mongodb+srv://{MONGO_USER_NAME}:{
-    MONGO_PASSWORD}@cluster0.teog563.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = f"mongodb+srv://{MONGO_USER_NAME}:{MONGO_PASSWORD}@cluster0.teog563.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 CLIENT = MongoClient(uri, server_api=ServerApi('1'))
 air_data = []
@@ -22,8 +22,6 @@ collection = 'Place_LatLong_API'
 
 for document in database[collection].find():
     place_name = document['place']
-    if place_name == 'Ba Tháng Hai – Sư Vạn Hạnh':
-        print(True)
     for air in document['air_data']:
         air_data.append({
             'place_name': place_name,
@@ -42,31 +40,20 @@ for document in database[collection].find():
 
 # Create a DataFrame
 df_air = pd.DataFrame(air_data)
-print('Ba Tháng Hai – Sư Vạn Hạnh' in list(df_air['place_name']))
-print(df_air.columns)
-
+#print(df_air.columns)
 # Convert 'Datetime' to datetime type and ensure timezone is parsed
+df_air = df_air[::10]
+
 df_air.drop('time', axis=1, inplace=True)
 
 df_air['index'] = df_air.groupby('place_name').cumcount()
 df_air.set_index(['place_name', 'index'], inplace=True)
-
-for i in range(len(df_air.index)):
-  if 'Ba Tháng Hai – Sư Vạn Hạnh' in df_air.index[i][0]:
-    print(True)
-
 df_air = df_air.unstack(level=0)
-print(df_air.columns)
-print(df_air)
 
-df_air = df_air[::10]
-print(df_air)
 df_air.reset_index(drop=True, inplace=True)
-print(df_air)
-print(df_air.columns)
 df_air.columns = [' '.join(col).strip()
                   for col in df_air.columns.values]
-print(df_air.columns)
+df_air.drop('index', axis = 1, inplace=True)
 
 df_air = df_air.fillna(df_air.mean())
 series_weights = {}
@@ -75,7 +62,6 @@ for x in df_air.columns:
     series_weights[x] = 2
   else:
     series_weights[x] = 1
-
 forecaster = ForecasterAutoregMultiSeries(
     regressor=GradientBoostingRegressor(random_state=123),
     lags=48,
@@ -85,7 +71,6 @@ forecaster = ForecasterAutoregMultiSeries(
     series_weights=series_weights
 )
 # If you need to pass this to the forecaster, ensure you handle the data format correctly.
-# Fit the forecaster to the DataFrame with only 'car' columns
 forecaster.fit(series=df_air)
 
 steps = 168
@@ -114,6 +99,6 @@ for document in database[collection].find():
         'nh3': row[nh3]
     }
     prediction_list[idx-len(df_air.index)] = dic
-  database[collection].find_one_and_update(
-      {"place": place_name}, {"$set": {'air_data': prediction_list}})
+  # database[collection].find_one_and_update(
+  #     {"place": place_name}, {"$set": {'air_data': prediction_list}})
   prediction_list = [None] * steps
