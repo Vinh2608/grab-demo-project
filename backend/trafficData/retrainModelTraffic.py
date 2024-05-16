@@ -100,4 +100,4 @@ for document in database[collection].find():
     prediction_list[idx-len(df_traffic.index)] = dic
   database[collection].find_one_and_update(
       {"place": place_name}, {"$set": {'traffic_data': prediction_list}})
-  prediction_list = []
+  prediction_list = [None] * steps
