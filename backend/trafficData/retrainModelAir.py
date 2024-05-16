@@ -39,8 +39,6 @@ for document in database[collection].find():
 
 # Create a DataFrame
 df_air = pd.DataFrame(air_data)
-#print(df_air.columns)
-# Convert 'Datetime' to datetime type and ensure timezone is parsed
 df_air = df_air[::10]
 
 df_air.drop('time', axis=1, inplace=True)
@@ -52,8 +50,6 @@ df_air = df_air.unstack(level=0)
 df_air.reset_index(drop=True, inplace=True)
 df_air.columns = [' '.join(col).strip()
                   for col in df_air.columns.values]
-print(df_air)
-print(df_air.columns)
 df_air = df_air.fillna(df_air.mean())
 series_weights = {}
 for x in df_air.columns:
@@ -98,6 +94,6 @@ for document in database[collection].find():
         'nh3': row[nh3]
     }
     prediction_list[idx-len(df_air.index)] = dic
-  # database[collection].find_one_and_update(
-  #     {"place": place_name}, {"$set": {'air_data': prediction_list}})
+  database[collection].find_one_and_update(
+      {"place": place_name}, {"$set": {'air_data': prediction_list}})
   prediction_list = [None] * steps
